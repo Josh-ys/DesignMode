@@ -26,6 +26,14 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class MQTest {
     public static void main(String[] args) {
+
+        /**
+         * BlockingQueue的实现类之LinkedBlockingDeque
+         * 基于链表的阻塞队列,内部维护一个链表存储缓存数据
+         * 内部采用读写分离的锁机制,所以支持写入和读取的并发操作
+         * 创建时可指定长度也可以不指定，不指定时代表无界队列
+         * 不允许null值
+         */
         BlockingQueue<MailContent> contents = new LinkedBlockingQueue<>();
 
         //生产者
