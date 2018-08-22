@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 产生数据放入队列
+ *
  * @author joeysh
  * @date 2018/08/23 01:01
  */
