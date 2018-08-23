@@ -37,6 +37,10 @@ public class ThreadPoolUtil {
         executorService.allowCoreThreadTimeOut(true);
     }
 
+    public ThreadPoolExecutor getThreadPool() {
+        return executorService;
+    }
+
     public void shutdown() {
         if (executorService != null) {
             executorService.shutdown();
