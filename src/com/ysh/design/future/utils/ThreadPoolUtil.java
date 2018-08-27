@@ -8,7 +8,7 @@ import java.util.concurrent.*;
  */
 public class ThreadPoolUtil {
     private static int coreThread;
-    private static int MaxThread;
+    private static int maxThread;
     private static final long KEEP_ALIVE_TIME = 1;
 
     private static ThreadPoolUtil threadPoolUtil;
@@ -22,7 +22,7 @@ public class ThreadPoolUtil {
                 int cpuNum = Runtime.getRuntime().availableProcessors();
                 // 根据cpu数量,计算出合理的线程并发数
                 coreThread = cpuNum * 2;
-                MaxThread = coreThread + 1;
+                maxThread = coreThread + 1;
                 threadPoolUtil = new ThreadPoolUtil();
             }
         }
@@ -31,7 +31,7 @@ public class ThreadPoolUtil {
 
     public void execute(Runnable runnable) {
         executorService = new ThreadPoolExecutor(
-                coreThread, MaxThread, KEEP_ALIVE_TIME, TimeUnit.MICROSECONDS, new LinkedBlockingQueue<>(1),
+                coreThread, maxThread, KEEP_ALIVE_TIME, TimeUnit.MICROSECONDS, new LinkedBlockingQueue<>(1),
                 new ThreadPoolExecutor.DiscardPolicy());
         executorService.execute(runnable);
         executorService.allowCoreThreadTimeOut(true);
