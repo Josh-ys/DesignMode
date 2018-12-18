@@ -34,7 +34,7 @@ public class LinkedStack<T> {
         T item = top.item;
         if (!top.end()) {
             top = top.next;
-                               }
+        }
         return item;
     }
 
