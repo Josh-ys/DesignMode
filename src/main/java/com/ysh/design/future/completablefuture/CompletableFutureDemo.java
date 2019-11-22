@@ -17,7 +17,7 @@ public class CompletableFutureDemo {
 
     public static void main(String[] args) {
         try {
-            test11();
+            test7();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -161,14 +161,18 @@ public class CompletableFutureDemo {
         for (int i = 0; i < 10; i++) {
             int a = i;
             futures.add(CompletableFuture.supplyAsync(() -> {
-                System.out.println(a);
+                try {
+                    TimeUnit.SECONDS.sleep(3);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 return a;
             }));
         }
         //当所有future完成的时候，我们调用了future.join()，因此我们不会在任何地方阻塞(调用thenApply 执行的时候代表所有的我们调用了future已经完成，在获取他们的结果 所以不会阻塞)
         CompletableFuture<List<Integer>> apply = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
                 .thenApply(v -> futures.stream().map(CompletableFuture::join).collect(Collectors.toList()));
-        apply.thenAccept(System.out::println);
+        apply.thenAccept(System.out::println).get();
         System.out.println("finish");
     }
 
