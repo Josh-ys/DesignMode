@@ -53,7 +53,7 @@ public class CompletableFutureDemo {
             }
             System.out.println("I'll run in a separate thread than the main thread.");
         });
-        future.get();
+        TimeUnit.SECONDS.sleep(3);
     }
 
     /**
@@ -91,7 +91,8 @@ public class CompletableFutureDemo {
                 throw new IllegalStateException(e);
             }
             return "joey";
-        }).thenApply(name -> "Hello " + name);
+        }).thenApply(name -> "Hello " + name)
+                .thenApply(greeting -> greeting + ", Welcome back");
         System.out.println(completableFuture.get());
 
         completableFuture.thenAccept(s -> System.out.println("123 " + s));
@@ -166,13 +167,15 @@ public class CompletableFutureDemo {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                System.out.println(a);
                 return a;
             }));
         }
         //当所有future完成的时候，我们调用了future.join()，因此我们不会在任何地方阻塞(调用thenApply 执行的时候代表所有的我们调用了future已经完成，在获取他们的结果 所以不会阻塞)
-        CompletableFuture<List<Integer>> apply = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
-                .thenApply(v -> futures.stream().map(CompletableFuture::join).collect(Collectors.toList()));
-        apply.thenAccept(System.out::println).get();
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                .thenApply(v -> futures.stream().map(CompletableFuture::join).collect(Collectors.toList()))
+                .thenAccept(System.out::println)
+                .join();
         System.out.println("finish");
     }
 
