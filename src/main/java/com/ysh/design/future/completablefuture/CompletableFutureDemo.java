@@ -39,7 +39,7 @@ public class CompletableFutureDemo {
     /**
      * 使用 runAsync() 运行异步计算
      * <p>
-     * 想异步的运行一个后台任务并且不想改任务返回任务东西，
+     * 想异步的运行一个后台任务并且不想该任务返回任何东西，
      * 可以使用 CompletableFuture.runAsync()方法，它持有一个Runnable 对象，并返回 CompletableFuture<Void>
      * <p>
      * 也可以创建一个线程池并传给runAsync()和supplyAsync()方法来让他们从线程池中获取一个线程执行它们的任务
@@ -167,7 +167,6 @@ public class CompletableFutureDemo {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println(a);
                 return a;
             }));
         }
