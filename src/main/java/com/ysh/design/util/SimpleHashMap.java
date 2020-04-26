@@ -1,4 +1,4 @@
-package com.ysh.design.utils;
+package com.ysh.design.util;
 
 import java.util.*;
 
