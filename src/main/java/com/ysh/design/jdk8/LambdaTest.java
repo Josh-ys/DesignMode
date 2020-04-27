@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
  * @author yangshenghong
  * @date 2018-08-28
  */
-public class Jdk8 {
+public class LambdaTest {
     public static void main(String[] args) {
         System.out.println("使用 Java 7: ");
 
@@ -52,7 +52,7 @@ public class Jdk8 {
         System.out.println("使用 Java 8: ");
 
         System.out.println("列表: " + strings);
-        count = strings.stream().filter(string -> string.isEmpty()).count();
+        count = strings.stream().filter(String::isEmpty).count();
         System.out.println("空字符串数量为: " + count);
 
         count = strings.stream().filter(string -> string.length() == 3).count();
@@ -78,7 +78,7 @@ public class Jdk8 {
 
         random.ints().limit(10).sorted().forEach(System.out::println);
         // 并行处理
-        count = strings.parallelStream().filter(string -> string.isEmpty()).count();
+        count = strings.parallelStream().filter(String::isEmpty).count();
         System.out.println("空字符串的数量为: " + count);
     }
 
@@ -127,7 +127,7 @@ public class Jdk8 {
     private static List<Integer> getSquares(List<Integer> numbers) {
         List<Integer> squaresList = new ArrayList<>();
         for (Integer number : numbers) {
-            Integer square = new Integer(number.intValue() * number.intValue());
+            Integer square = number * number;
             if (!squaresList.contains(square)) {
                 squaresList.add(square);
             }
@@ -139,8 +139,8 @@ public class Jdk8 {
         int max = numbers.get(0);
         for (int i = 1; i < numbers.size(); i++) {
             Integer number = numbers.get(i);
-            if (number.intValue() > max) {
-                max = number.intValue();
+            if (number > max) {
+                max = number;
             }
         }
         return max;
@@ -150,8 +150,8 @@ public class Jdk8 {
         int min = numbers.get(0);
         for (int i = 1; i < numbers.size(); i++) {
             Integer number = numbers.get(i);
-            if (number.intValue() < min) {
-                min = number.intValue();
+            if (number < min) {
+                min = number;
             }
         }
         return min;
